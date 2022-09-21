@@ -91,10 +91,12 @@ app.set('view engine', 'ejs');
 
 // Routes
 const users = require('./routes/user')
+const posts = require('./routes/post')
 const auth = require('./routes/auth')
 
 
 app.use('/api/users', users);
+app.use('/api/posts', posts);
 app.use('/api/auth', auth);
 
 app.listen(app.get('port'))

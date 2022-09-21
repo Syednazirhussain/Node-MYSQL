@@ -31,7 +31,6 @@ exports.Comment = sequelize.define('comments', {
     tableName : "comments"
 })
 
-// this.Post.belongsTo(this.User, { foreignKey: "user_id" })
-
+this.Post.belongsTo(this.User, { foreignKey: "user_id" })
 this.User.hasMany(this.Post, { foreignKey: "user_id" })
 this.Post.hasMany(this.Comment, { foreignKey: "post_id" })

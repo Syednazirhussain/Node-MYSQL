@@ -3,7 +3,7 @@ const router = express.Router()
 
 const {
   index
-} = require('../app/controller/user')
+} = require('../app/controller/post')
 
 router.route('/').get(index)
 
