@@ -1,6 +1,6 @@
 const { User, Post, Comment } = require('../model/models')
 
-const utils = require('../middleware/utils')
+const utils = require('../helper/utils')
 const asyncWrapper = require('../middleware/async')
 
 

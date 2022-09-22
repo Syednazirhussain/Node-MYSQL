@@ -26,8 +26,6 @@ const userInfo = ({ token }) => {
     return decoded
 }
 
-
-
 module.exports = {
     createJWT,
     isTokenValid,

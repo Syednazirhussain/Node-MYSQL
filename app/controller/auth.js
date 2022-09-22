@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 
 const { createJWT } = require('./../helper/jwt')
 const { User } = require('../model/models')
-const utils = require('../middleware/utils')
+const utils = require('../helper/utils')
 const asyncWrapper = require('../middleware/async')
 const { checkPassword } = require('./../middleware/auth')
 

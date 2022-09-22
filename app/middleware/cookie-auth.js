@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes')
 const { isTokenValid } = require('./../helper/jwt')
-const utils = require('../middleware/utils')
+const utils = require('../helper/utils')
 
 exports.authenticateUserCookie = async (req, res, next) => {
     const token = req.signedCookies.token;

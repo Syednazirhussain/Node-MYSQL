@@ -1,4 +1,4 @@
-const { validationResult } = require('.//utils')
+const { validationResult } = require('./../helper/utils')
 const { check } = require('express-validator')
 
 exports.items = [
