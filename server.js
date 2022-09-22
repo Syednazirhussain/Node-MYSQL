@@ -10,7 +10,8 @@ const express = require('express')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 const compression = require('compression')
-const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload')
 
 const app = express()
 
@@ -75,7 +76,9 @@ app.use(cors())
 app.use(helmet())
 app.use(fileUpload())
 app.use(compression())
+app.use(express.json())
 app.use(passport.initialize())
+app.use(cookieParser(process.env.JWT_SECRET))
 
 
 app.use(express.static('public'))
