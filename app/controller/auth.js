@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt-nodejs')
 const { StatusCodes } = require('http-status-codes')
 
-const { createJWT } = require('./../helper/jwt')
 const { User } = require('../model/models')
-const utils = require('../helper/utils')
-const asyncWrapper = require('../middleware/async')
 const { checkPassword } = require('./../middleware/auth')
+
+const { createJWT } = require('./../helper/jwt')
+const { asyncWrapper, handleError } = require('../helper/utils')
 
 
 exports.register = asyncWrapper(async (req, res) => {
@@ -56,7 +56,7 @@ exports.register = asyncWrapper(async (req, res) => {
 
   } catch (error) {
 
-    utils.handleError(res, error)
+    handleError(res, error)
   }
 })
 
@@ -67,7 +67,7 @@ exports.me = asyncWrapper(async (req, res) => {
     res.status(StatusCodes.ACCEPTED).json(req.user)
   } catch (error) {
     
-    utils.handleError(res, error)
+    handleError(res, error)
   }
 })
 
@@ -119,7 +119,7 @@ exports.login = asyncWrapper(async (req, res) => {
 
   } catch (error) {
     
-    utils.handleError(res, error)
+    handleError(res, error)
   }
 })
 
@@ -137,6 +137,6 @@ exports.logout = asyncWrapper(async (req, res) => {
 
   } catch (error) {
     
-    utils.handleError(res, error)
+    handleError(res, error)
   }
 })

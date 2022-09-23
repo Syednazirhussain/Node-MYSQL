@@ -69,6 +69,17 @@ exports.itemNotFound = (err, item, reject, message) => {
   }
 }
 
+exports.asyncWrapper = (fn) => {
+  return async (req, res, next) => {
+    try {
+      await fn(req, res, next)
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
+
 /**
  * Builds error for validation files
  * @param {Object} req - request object

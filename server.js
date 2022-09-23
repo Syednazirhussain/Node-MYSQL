@@ -84,7 +84,10 @@ app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.static('public'))
 app.use(
   express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
-);
+)
+// app.use(
+//   express.static(path.join(__dirname, "node_modules/admin-lte"))
+// )
 
 
 app.set('views', path.join(__dirname, 'views'))
@@ -101,6 +104,29 @@ const auth = require('./routes/auth')
 app.use('/api/users', users);
 app.use('/api/posts', posts);
 app.use('/api/auth', auth);
+
+
+// index page
+app.get('/', (req, res) => {
+
+  var mascots = [
+    { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+    { name: 'Tux', organization: "Linux", birth_year: 1996},
+    { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+  ]
+  
+  var tagline = "No programming concept is complete without a cute animal mascot."
+
+  res.render('index', {
+    mascots: mascots,
+    tagline: tagline
+  })
+
+})
+
+app.get('/about', (req, res) => {
+  res.render('about')
+});
 
 app.listen(app.get('port'))
 
