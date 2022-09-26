@@ -1,10 +1,10 @@
-const { User, Post, Comment } = require('../model/models')
+const { User, Post, Comment } = require('./../../model/models')
 
-const utils = require('../helper/utils')
-const asyncWrapper = require('../middleware/async')
+const utils = require('./../../helper/utils')
+const asyncWrapper = require('./../../middleware/async')
 
 
-exports.index = asyncWrapper(async (req, res) => {
+exports.getPosts = asyncWrapper(async (req, res) => {
   
   try {
 

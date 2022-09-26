@@ -13,7 +13,15 @@ const {
     login,
     logout,
     register,
-} = require('../app/controller/auth')
+} = require('../app/controller/api/auth')
+
+const {
+    getPosts
+} = require('../app/controller/api/post')
+
+const {
+    getUsers
+} = require('../app/controller/api/user')
 
 router.post(
     '/register',
@@ -42,5 +50,9 @@ router.post(
     authenticateUserCookie,
     logout
 )
+
+router.route('/post').get(getPosts)
+
+router.route('/user').get(getUsers)
 
 module.exports = router

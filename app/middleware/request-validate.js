@@ -75,7 +75,12 @@ exports.login = [
     })
     .withMessage('PASSWORD_TOO_SHORT_MIN_5'),
   (req, res, next) => {
-    validationResult(req, res, next)
+    if (req.method == 'POST') {
+
+      validationResult(req, res, next)
+    }
+
+    next()
   }
 ]
 

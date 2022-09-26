@@ -82,11 +82,14 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 
 app.use(express.static('public'))
+// app.use(
+//   express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
+// )
 app.use(
-  express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
+  express.static(path.join(__dirname, "node_modules/"))
 )
 // app.use(
-//   express.static(path.join(__dirname, "node_modules/admin-lte"))
+//   express.static(path.join(__dirname, "node_modules/jquery/dist/"))
 // )
 
 
@@ -96,37 +99,40 @@ app.set('view engine', 'ejs');
 
 
 // Routes
-const users = require('./routes/user')
-const posts = require('./routes/post')
-const auth = require('./routes/auth')
+// const users = require('./routes/user')
+// const posts = require('./routes/post')
+// const auth = require('./routes/auth')
 
 
-app.use('/api/users', users);
-app.use('/api/posts', posts);
-app.use('/api/auth', auth);
+// app.use('/api/users', require('./routes/user'));
+// app.use('/api/posts', require('./routes/post'));
+// app.use('/api/auth', require('./routes/auth'));
+
+app.use('/api', require('./routes/api'));
+app.use('/', require('./routes/web'));
 
 
 // index page
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
 
-  var mascots = [
-    { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-    { name: 'Tux', organization: "Linux", birth_year: 1996},
-    { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-  ]
+//   var mascots = [
+//     { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+//     { name: 'Tux', organization: "Linux", birth_year: 1996},
+//     { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+//   ]
   
-  var tagline = "No programming concept is complete without a cute animal mascot."
+//   var tagline = "No programming concept is complete without a cute animal mascot."
 
-  res.render('index', {
-    mascots: mascots,
-    tagline: tagline
-  })
+//   res.render('index', {
+//     mascots: mascots,
+//     tagline: tagline
+//   })
 
-})
+// })
 
-app.get('/about', (req, res) => {
-  res.render('about')
-});
+// app.get('/about', (req, res) => {
+//   res.render('about')
+// });
 
 app.listen(app.get('port'))
 
