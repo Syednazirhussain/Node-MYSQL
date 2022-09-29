@@ -10,6 +10,7 @@ const express = require('express')
 const passport = require('passport')
 const bodyParser = require('body-parser')
 const compression = require('compression')
+const session = require("express-session")
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 
@@ -45,6 +46,12 @@ if (process.env.USE_REDIS === 'true') {
   })
   app.use(cache)
 }
+
+app.use(session({ 
+  secret: process.env.SESSION_SECRET, 
+  saveUninitialized: true,
+  resave: true 
+}))
 
 // For parsing json
 app.use(

@@ -4,7 +4,6 @@ exports.User = sequelize.define('users', {
     name: {type: Sequelize.STRING},  
     username: {type: Sequelize.STRING},
     email: {type: Sequelize.STRING},
-    email: {type: Sequelize.STRING},
     email_verified_at: {type: Sequelize.DATE},           
     password: {type: Sequelize.STRING},
     created_at:{type: Sequelize.DATE},

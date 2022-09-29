@@ -1,7 +1,6 @@
 const { User } = require('./../model/models')
-const { attachCookiesToResponse, createJWT } = require('./../helper/jwt')
 const { checkPassword } = require('./../middleware/auth')
-const { asyncWrapper, handleError } = require('./../helper/utils')
+const { handleError } = require('./../helper/utils')
 const { StatusCodes } = require('http-status-codes')
 
 exports.login = async (req, res) => {
@@ -19,8 +18,6 @@ exports.login = async (req, res) => {
 exports.loginAttempt = async (req, res) => {
 
     try {
-
-        console.log("Method: "+req.method);
 
         const { email, password } = req.body
 
@@ -40,27 +37,26 @@ exports.loginAttempt = async (req, res) => {
             res.status(StatusCodes.UNAUTHORIZED).redirect('/login')
         }
 
-        let tokenUser = {
-            id: userExist.id,
-            name: userExist.name,
-            email: userExist.email
-        }
+        req.session.id = userExist.id
+        req.session.name = userExist.name
+        req.session.username = userExist.username
+        req.session.email = userExist.email
 
-        // attachCookiesToResponse({ res, user: tokenUser })
+        console.log(req.session)
 
-        let jwtToken = createJWT({ payload: tokenUser })
+        res.redirect('/home')
 
-        const oneDay = 1000 * 60 * 60 * 24;
+    } catch (error) {
 
-        res.cookie('token', jwtToken, {
-            httpOnly: true,
-            expires: new Date(Date.now() + oneDay),
-            secure: process.env.NODE_ENV === 'production',
-            signed: true,
-        })
+        handleError(res, error)
+    }
+}
 
-        res.status(StatusCodes.OK).redirect('/home')
+exports.logout = async (req, res) => {
+    try {
 
+        req.session.destroy()
+        res.redirect('/login')
     } catch (error) {
 
         handleError(res, error)

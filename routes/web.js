@@ -1,6 +1,8 @@
 const express = require('express')
 const trimRequest = require('trim-request')
 
+const authService = require('./../app/services/auth.service')
+
 const router = express.Router()
 
 /* ------------- Middleware ------------- */
@@ -15,7 +17,8 @@ const validate = require('./../app/middleware/request-validate')
 
 const {
     login,
-    loginAttempt
+    // loginAttempt,
+    logout
 } = require('./../app/controller/auth')
 
 const {
@@ -40,11 +43,36 @@ router.post(
     loginAttempt
 )
 
+router.post(
+    '/logout',
+    authenticateUser,
+    logout
+)
+
 router.get(
     '/home',
     authenticateUser,
     home
 )
+
+
+async function loginAttempt(req, res) {
+
+    let result = await authService.login(req);
+
+    console.log(result);
+
+    if (result.error == 1) {
+        console.log('123');
+        // res.redirect("/login")
+    } else {
+
+        console.log('Nazir');
+        res.redirect("/home")
+    }
+
+    return 
+}
 
 
 

@@ -5,21 +5,16 @@ const authenticateUser = async (req, res, next) => {
 
   try {
 
-    const token = req.signedCookies.token;
+    response.setHeader("Content-Type", "text/html")
 
-    if (!token) {
-
-      res.status(StatusCodes.PERMANENT_REDIRECT).redirect('/login')
+    if (req.session.username === undefined || req.session.username === null) {
+      res.redirect('/login')
     } else {
-
-      const { id, name, email } = isTokenValid({ token })
-      req.user = { id, name, email }
       next()
     }
 
-  } catch (error) {
-    
-    res.status(StatusCodes.BAD_REQUEST).redirect('/login')
+  } catch (error) {    
+    res.redirect('/login')
   }
 };
 
