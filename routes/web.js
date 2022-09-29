@@ -14,7 +14,8 @@ const validate = require('./../app/middleware/request-validate')
 /* ------------- Controllers ------------- */
 
 const {
-    login
+    login,
+    loginAttempt
 } = require('./../app/controller/auth')
 
 const {
@@ -27,11 +28,16 @@ router.get('/', (req, res) => {
     res.redirect('/home');
 })
 
-router.all(
+router.get(
+    '/login',
+    login
+)
+
+router.post(
     '/login',
     trimRequest.all,
     validate.login,
-    login
+    loginAttempt
 )
 
 router.get(

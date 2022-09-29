@@ -21,11 +21,11 @@ app.set('port', process.env.PORT || 3000)
 const initMySQL = require('./database/mysql')
 
 // Swagger
-const swaggerUI = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
 // Enable only in development HTTP request logger middleware
 if (process.env.NODE_ENV === 'development') {
@@ -82,57 +82,18 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 
 app.use(express.static('public'))
-// app.use(
-//   express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
-// )
 app.use(
   express.static(path.join(__dirname, "node_modules/"))
 )
-// app.use(
-//   express.static(path.join(__dirname, "node_modules/jquery/dist/"))
-// )
 
 
 app.set('views', path.join(__dirname, 'views'))
 app.engine('html', require('ejs').renderFile)
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
 
-// Routes
-// const users = require('./routes/user')
-// const posts = require('./routes/post')
-// const auth = require('./routes/auth')
-
-
-// app.use('/api/users', require('./routes/user'));
-// app.use('/api/posts', require('./routes/post'));
-// app.use('/api/auth', require('./routes/auth'));
-
-app.use('/api', require('./routes/api'));
-app.use('/', require('./routes/web'));
-
-
-// index page
-// app.get('/', (req, res) => {
-
-//   var mascots = [
-//     { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-//     { name: 'Tux', organization: "Linux", birth_year: 1996},
-//     { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-//   ]
-  
-//   var tagline = "No programming concept is complete without a cute animal mascot."
-
-//   res.render('index', {
-//     mascots: mascots,
-//     tagline: tagline
-//   })
-
-// })
-
-// app.get('/about', (req, res) => {
-//   res.render('about')
-// });
+app.use('/api', require('./routes/api'))
+app.use('/', require('./routes/web'))
 
 app.listen(app.get('port'))
 
