@@ -7,8 +7,13 @@ exports.login = async (req, res) => {
 
     try {
 
-        res.setHeader('Content-Type', 'text/html')
-        res.render('auth/login')
+        if (req.session.username === undefined || req.session.username === null) {
+            res.setHeader('Content-Type', 'text/html')
+            res.render('auth/login')
+          } else {
+            res.redirect('/home')
+        }
+        
     } catch (error) {
 
         handleError(res, error)
