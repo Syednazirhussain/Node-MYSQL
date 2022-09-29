@@ -5,9 +5,10 @@ const authenticateUser = async (req, res, next) => {
 
   try {
 
-    response.setHeader("Content-Type", "text/html")
+    res.setHeader("Content-Type", "text/html")
 
     if (req.session.username === undefined || req.session.username === null) {
+      console.log('Atif');
       res.redirect('/login')
     } else {
       next()

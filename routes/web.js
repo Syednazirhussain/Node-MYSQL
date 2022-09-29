@@ -38,8 +38,8 @@ router.get(
 
 router.post(
     '/login',
-    trimRequest.all,
-    validate.login,
+    // trimRequest.all,
+    // validate.login,
     loginAttempt
 )
 
