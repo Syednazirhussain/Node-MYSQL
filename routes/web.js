@@ -24,6 +24,10 @@ const {
     home
 } = require('../app/controller/home.controller')
 
+const {
+    getUsers
+} = require('../app/controller/user.controller')
+
 /* ------------- Routes ------------- */
 
 router.get('/', (req, res) => {
@@ -48,16 +52,24 @@ router.get(
     logout
 )
 
+router.all(
+    '/forget-password',
+    forgetPassword
+)
+
 router.get(
     '/home',
     authenticateUser,
     home
 )
 
-router.all(
-    '/forget-password',
-    forgetPassword
+router.get(
+    '/users',
+    authenticateUser,
+    getUsers
 )
+
+
 
 
 

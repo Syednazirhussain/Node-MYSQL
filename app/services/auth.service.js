@@ -24,7 +24,7 @@ async function login(req) {
             return { error: 1, message: 'Invalid password' }
         }
 
-        req.session.id = userExist.id
+        req.session.user_id = userExist.id
         req.session.name = userExist.name
         req.session.username = userExist.username
         req.session.email = userExist.email
