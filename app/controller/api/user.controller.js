@@ -1,7 +1,7 @@
-const { User, Post, Comment } = require('./../../model/models')
+const { User, Post, Comment } = require('../../model/models')
 
-const utils = require('./../../helper/utils')
-const asyncWrapper = require('./../../middleware/async')
+const utils = require('../../helper/utils')
+const asyncWrapper = require('../../middleware/async')
 
 
 exports.getUsers = asyncWrapper(async (req, res) => {

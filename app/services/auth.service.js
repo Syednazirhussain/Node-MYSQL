@@ -29,7 +29,7 @@ async function login(req) {
         req.session.username = userExist.username
         req.session.email = userExist.email
 
-        console.log(req.session);
+        console.log(req.session)
 
         return { error: 0, message: 'Login Successfull' }
 

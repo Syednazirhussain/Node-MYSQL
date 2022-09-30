@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt-nodejs')
 const { StatusCodes } = require('http-status-codes')
 
-const { User } = require('./../../model/models')
-const { checkPassword } = require('./../../middleware/auth')
+const { User } = require('../../model/models')
+const { checkPassword } = require('../../middleware/auth')
 
-const { createJWT } = require('./../../helper/jwt')
-const { asyncWrapper, handleError } = require('./../../helper/utils')
+const { createJWT } = require('../../helper/jwt')
+const { asyncWrapper, handleError } = require('../../helper/utils')
 
 
 exports.register = asyncWrapper(async (req, res) => {

@@ -24,6 +24,22 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
+      <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+        <% if (Array.isArray(error)) { %>
+          <ul>
+            <% error.forEach(function(e) { %>
+              <li><%= e.msg %></li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p><%= error %></p>
+        <% } %>
+      </div>
+      <% } %>
+
       <form action="/login" method="POST">
         <div class="input-group mb-3">
           <input name="email" type="email" class="form-control" placeholder="Email">

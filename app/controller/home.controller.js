@@ -1,4 +1,4 @@
-const { handleError } = require('./../helper/utils')
+const { handleError } = require('../helper/utils')
 
 exports.home = (req, res) => {
 
@@ -11,7 +11,7 @@ exports.home = (req, res) => {
         ]
 
         var tagline = "No programming concept is complete without a cute animal mascot."
-
+                
         res.render('index', {
             mascots: mascots,
             tagline: tagline

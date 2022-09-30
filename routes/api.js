@@ -13,15 +13,15 @@ const {
     login,
     logout,
     register,
-} = require('../app/controller/api/auth')
+} = require('../app/controller/api/auth.controller')
 
 const {
     getPosts
-} = require('../app/controller/api/post')
+} = require('../app/controller/api/post.controller')
 
 const {
     getUsers
-} = require('../app/controller/api/user')
+} = require('../app/controller/api/user.controller')
 
 router.post(
     '/register',
