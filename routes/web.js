@@ -16,7 +16,8 @@ const validate = require('./../app/middleware/request-validate')
 const {
     login,
     loginAttempt,
-    logout
+    logout,
+    forgetPassword
 } = require('../app/controller/auth.controller')
 
 const {
@@ -51,6 +52,11 @@ router.get(
     '/home',
     authenticateUser,
     home
+)
+
+router.all(
+    '/forget-password',
+    forgetPassword
 )
 
 

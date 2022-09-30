@@ -58,3 +58,14 @@ exports.logout = async (req, res) => {
         handleError(res, error)
     }
 }
+
+exports.forgetPassword = async (req, res) => {
+
+    if (req.method == "GET") {
+
+        res.render('auth/forget-password')
+    } else {
+
+        console.log(req.body);
+    }
+}
