@@ -68,11 +68,11 @@
                         <% if (typeof users !== 'undefined') { %>
                         <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="previous()">&laquo;</a></li>
                                 <% for(let x = 1; x <= pageCount; x++) { %>
                                 <li class="page-item"><a class="page-link" href="/users?page=<%= x %>"><%= x %></a></li>
                                 <% } %>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);"  onclick="next()">&raquo;</a></li>
                             </ul>
                         </div>
                         <% } %>
@@ -83,3 +83,33 @@
     </section>
     <!-- /.content -->
     <%- include('./../partials/footer'); %>
+
+
+    <script type="text/javascript">
+
+        let path = window.location.pathname
+        let search = window.location.search
+        let currentPage = parseInt(search.split('=')[1])
+
+        console.log(path);
+        console.log(search);
+        console.log(currentPage);
+
+        let newPath = ''
+
+        function next() {
+            currentPage++
+            newPath = path+'?page='+currentPage
+            window.location.href = newPath
+        }
+
+        function previous () {
+            if (currentPage > 1) {
+                currentPage--
+                newPath = path+'?page='+currentPage
+                window.location.href = newPath
+            }
+        }
+
+
+    </script>
