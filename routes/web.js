@@ -17,7 +17,11 @@ const {
     login,
     loginAttempt,
     logout,
-    forgetPassword
+    forgetPasswordView,
+    forgetPasswordPost,
+    resetPasswordView,
+    resetPassword,
+    resetPasswordSuccess
 } = require('../app/controller/auth.controller')
 
 const {
@@ -56,9 +60,27 @@ router.get(
 
 router.all(
     '/forget-password',
-    forgetPassword
+    forgetPasswordView
 )
 
+router.post(
+    '/forget-passwordPost',
+    forgetPasswordPost
+)
 
+router.get(
+    '/reset-password/:token/:email/:val',
+    resetPasswordView
+)
+
+router.post(
+    '/reset-password',
+    resetPassword
+)
+
+router.get(
+    '/reset-password/success',
+    resetPasswordSuccess
+);
 
 module.exports = router

@@ -13,6 +13,7 @@ const {
     login,
     logout,
     register,
+    forgetPassword
 } = require('../app/controller/api/auth.controller')
 
 const {
@@ -49,6 +50,11 @@ router.post(
     authenticateToken,
     authenticateUserCookie,
     logout
+)
+
+router.post(
+    '/forget-password',
+    forgetPassword
 )
 
 router.route('/post').get(getPosts)

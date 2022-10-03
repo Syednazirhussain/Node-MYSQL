@@ -6,7 +6,9 @@ const { checkPassword } = require('../../middleware/auth')
 
 const { createJWT } = require('../../helper/jwt')
 const { asyncWrapper, handleError } = require('../../helper/utils')
-
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const mailer = require("../../helper/mailer");
 
 exports.register = asyncWrapper(async (req, res) => {
   
@@ -161,3 +163,53 @@ exports.logout = asyncWrapper(async (req, res) => {
     handleError(res, error)
   }
 })
+
+exports.forgetPassword = asyncWrapper(async (req, res) => {
+    try {
+
+      const email = req.body.email;
+
+      const userExist = await User.findOne({
+          where: {
+              email: email
+          }
+      })
+
+      if (userExist) {
+          let token = new Buffer(uuidv4());
+          let base64Token = token.toString('base64');
+
+          const tokenUpdate = await User.update({ token: base64Token }, {
+              where: {
+                  email: email
+              }
+          });
+
+          let buff = new Buffer(email);
+          let base64data = buff.toString('base64');
+
+          // Html email body
+          let link = `${process.env.APP_BASE_PATH}reset-password/${base64Token}/${base64data}/1`;
+
+          var html = fs.readFileSync(process.cwd()+'/views/emailresponse/email.ejs').toString();
+          
+          html = html.replace('username', userExist.name);
+          html = html.replace('#Link', link);
+
+          // Send confirmation email
+          await mailer.send(
+              process.env.FROM_EMAIL,
+              email,
+              "Reset Password Link",
+              html
+          );
+
+          return res.status(StatusCodes.OK).json({ msg: 'We have e-mailed your password reset link!. Please also check Junk/Spam folder as well.!' });
+      } else {
+          return res.status(StatusCodes.NOT_FOUND).json({ message: 'Email does not exist' })
+      }
+
+  } catch (error) {
+      handleError(res, error)
+  }  
+});

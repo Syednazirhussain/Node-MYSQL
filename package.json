@@ -23,6 +23,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.3",
     "express-validator": "^6.3.1",
+    "fs": "^0.0.1-security",
     "helmet": "^3.21.2",
     "http-errors": "^2.0.0",
     "http-status-codes": "^2.1.4",
