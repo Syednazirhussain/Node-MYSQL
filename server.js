@@ -50,9 +50,9 @@ if (process.env.USE_REDIS === 'true') {
 
 app.use(session({ 
   secret: process.env.SESSION_SECRET, 
-  resave: false, 
+  resave: true, 
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 600000000 }
 }))
 
 // For parsing json

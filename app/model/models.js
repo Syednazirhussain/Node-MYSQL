@@ -21,6 +21,23 @@ exports.Post = sequelize.define('posts', {
     tableName : "posts"
 })
 
+exports.RoleUser = sequelize.define('role_users', {
+    user_id: {type: Sequelize.NUMBER},
+    role_id: {type: Sequelize.NUMBER},
+    created_at:{type: Sequelize.DATE},
+    updated_at:{type: Sequelize.DATE}       
+}, {
+    tableName : "role_users"
+})
+
+exports.Role = sequelize.define('roles', {
+    name: {type: Sequelize.NUMBER},
+    created_at:{type: Sequelize.DATE},
+    updated_at:{type: Sequelize.DATE}       
+}, {
+    tableName : "roles"
+})
+
 exports.Comment = sequelize.define('comments', {
     text: {type: Sequelize.STRING},  
     post_id: {type: Sequelize.NUMBER},
@@ -33,3 +50,6 @@ exports.Comment = sequelize.define('comments', {
 this.Post.belongsTo(this.User, { foreignKey: "user_id" })
 this.User.hasMany(this.Post, { foreignKey: "user_id" })
 this.Post.hasMany(this.Comment, { foreignKey: "post_id" })
+
+this.User.hasMany(this.RoleUser, { foreignKey: "user_id" })
+this.RoleUser.belongsTo(this.Role, { foreignKey: "role_id" })

@@ -1,19 +1,36 @@
-const { User, Post, Comment } = require('./../model/models')
+const { User, RoleUser, Role } = require('./../model/models')
 
 async function index({ params }) {
 
     try {
 
-        let users = await User.findAll({
-            include: {
-              model: Post,
-              include: {
-                model: Comment
-              }
-            }
-          })
+      // let users = await User.findAll({
+      //   include: {
+      //     model: Post,
+      //     include: {
+      //       model: Comment
+      //     }
+      //   },
+      //   limit: 2
+      // })
 
-          return { error: 0, payload: { users: users } }
+      let users = await User.findAll({
+        include: {
+          model: RoleUser,
+          include: {
+            model: Role
+          }
+        },
+        order: [
+          ['id', 'DESC'],
+        ],
+        // limit: 10,
+      })
+
+
+      console.log(users)
+
+      return { error: 0, payload: { users: users } }
 
     } catch (error) {
 

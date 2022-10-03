@@ -5,8 +5,6 @@ exports.getUsers = async (req, res) => {
 
     try {
 
-        console.log("params", req.params)
-
         let result = await userServices.index({ params: req.params })
         
         if (result.error == 1) {
