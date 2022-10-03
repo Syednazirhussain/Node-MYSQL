@@ -43,7 +43,7 @@
                                     <% if (typeof users !== 'undefined') { %>
                                         <% users.forEach((user, index) => { %>
                                         <tr>
-                                            <td><%= index %></td>
+                                            <td><%= user.id %></td>
                                             <td><%= user.name %></td>
                                             <td><%= user.email %></td>
                                             <td>
@@ -65,15 +65,17 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
+                        <% if (typeof users !== 'undefined') { %>
                         <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-0 float-right">
                                 <li class="page-item"><a class="page-link" href="javascript:void(0);">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                <% for(let x = 1; x <= pageCount; x++) { %>
+                                <li class="page-item"><a class="page-link" href="/users?page=<%= x %>"><%= x %></a></li>
+                                <% } %>
                                 <li class="page-item"><a class="page-link" href="javascript:void(0);">&raquo;</a></li>
                             </ul>
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>

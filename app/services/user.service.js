@@ -1,20 +1,15 @@
 const { User, RoleUser, Role } = require('./../model/models')
 
-async function index({ params }) {
+async function index(req) {
 
     try {
 
-      // let users = await User.findAll({
-      //   include: {
-      //     model: Post,
-      //     include: {
-      //       model: Comment
-      //     }
-      //   },
-      //   limit: 2
-      // })
+      let skip = 0
+      if (req.query.page > 1) {
+        skip = (req.query.page * 10)
+      }
 
-      let users = await User.findAll({
+      let results = await User.findAndCountAll({
         include: {
           model: RoleUser,
           include: {
@@ -24,17 +19,25 @@ async function index({ params }) {
         order: [
           ['id', 'DESC'],
         ],
-        // limit: 10,
+        limit: 10, 
+        offset: skip
       })
 
+      const itemCount = results.count
+      const pageCount = Math.ceil(results.count / 10)
 
-      console.log(users)
+      let payload = {
+        users: results.rows,
+        pageCount,
+        itemCount
+      }
 
-      return { error: 0, payload: { users: users } }
+      console.log(payload)
+
+      return { error: 0, payload: payload }
 
     } catch (error) {
-
-        return { error: 1, message: error.message }
+      return { error: 1, message: error.message }
     }
 
 

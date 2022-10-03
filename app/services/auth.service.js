@@ -2,9 +2,8 @@ const { User } = require('./../model/models')
 const { checkPassword } = require('./../middleware/auth')
 
 async function login(req) {
-    try {
 
-        console.log(req.body);
+    try {
 
         const { email, password } = req.body
 
@@ -29,7 +28,7 @@ async function login(req) {
         req.session.username = userExist.username
         req.session.email = userExist.email
 
-        console.log(req.session)
+        // console.log(req.session)
 
         return { error: 0, message: 'Login Successfull' }
 

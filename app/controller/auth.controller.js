@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
                 res.render('auth/login')
             }
             
-          } else {
+        } else {
             res.redirect('/home')
         }
         
