@@ -28,6 +28,10 @@ const {
     home
 } = require('../app/controller/home.controller')
 
+const {
+    getUsers
+} = require('../app/controller/user.controller')
+
 /* ------------- Routes ------------- */
 
 router.get('/', (req, res) => {
@@ -52,15 +56,21 @@ router.get(
     logout
 )
 
+router.all(
+    '/forget-password',
+    forgetPasswordView
+)
+
 router.get(
     '/home',
     authenticateUser,
     home
 )
 
-router.all(
-    '/forget-password',
-    forgetPasswordView
+router.get(
+    '/users',
+    authenticateUser,
+    getUsers
 )
 
 router.post(
@@ -82,5 +92,7 @@ router.get(
     '/reset-password/success',
     resetPasswordSuccess
 );
+
+
 
 module.exports = router

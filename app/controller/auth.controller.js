@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
                 res.render('auth/login', { success: req.flash('success') })
             }
             
-          } else {
+        } else {
             res.redirect('/home')
         }
         

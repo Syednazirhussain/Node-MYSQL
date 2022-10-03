@@ -8,9 +8,8 @@ const { globalAgent } = require('http');
 const bcrypt = require('bcrypt-nodejs');
 
 async function login(req) {
-    try {
 
-        console.log(req.body);
+    try {
 
         const { email, password } = req.body
 
@@ -30,12 +29,12 @@ async function login(req) {
             return { error: 1, message: 'Invalid password' }
         }
 
-        req.session.id = userExist.id
+        req.session.user_id = userExist.id
         req.session.name = userExist.name
         req.session.username = userExist.username
         req.session.email = userExist.email
 
-        console.log(req.session)
+        // console.log(req.session)
 
         return { error: 0, message: 'Login Successfull' }
 
